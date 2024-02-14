@@ -1,0 +1,159 @@
+:root {
+  --cell-height: 5rem;
+  --cell-width: 5rem;
+  --window-width: 5rem;
+  --window-height: 5rem;
+  --cell-bg-color: #fdf2f8;
+  --cell-text-color: #be185d;
+}
+
+#sliding-window-container {
+  background: #111;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+}
+
+/* HISTORY */
+
+#history {
+  background-color: #1e1e1e;
+  color: white;
+  padding: 1rem;
+  border-radius: 0.4rem;
+  min-width: 15rem;
+  text-align: center;
+}
+
+/************** CANVAS ***************/
+
+/* CELL VALUES */
+#cell-values input {
+  min-width: 30vw;
+  background-color: #1e1e1e;
+  padding: 2rem 1rem;
+  border: none;
+  outline: none;
+  color: white;
+  border-radius: 0.4rem;
+  letter-spacing: 2rem;
+  font-size: 150%;
+}
+
+/* CANVAS */
+
+#canvas {
+  flex-grow: 1;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#frame {
+  display: flex;
+  position: relative;
+  border-radius: 0.4rem;
+}
+
+#sliding-window {
+  /* border-radius: 0.4rem; */
+  position: absolute;
+  top: -1rem;
+  left: 0;
+  width: 5rem;
+  height: 5rem;
+  background-color: var(--cell-text-color);
+  transition: all 0.2s ease-in-out;
+  height: 7rem;
+  border-top: 0.2rem solid var(--cell-text-color);
+  border-bottom: 0.2rem solid var(--cell-text-color);
+}
+
+.cell {
+  width: 5rem;
+  height: 5rem;
+  color: var(--cell-text-color);
+  line-height: 5rem;
+  text-align: center;
+  font-family: "Google Sans";
+  font-weight: 500;
+  font-size: 3rem;
+  position: relative;
+  z-index: 999;
+  background-color: var(--cell-bg-color);
+  opacity: 0.5;
+  transition: all 0.2s ease-in-out;
+  font-size: 150%;
+}
+
+.cell.highlight {
+  opacity: 1;
+  font-size: 200%;
+}
+
+/* highlight first cell by default */
+.cell:first-of-type {
+  border-top-left-radius: 0.3rem;
+  border-bottom-left-radius: 0.3rem;
+}
+
+.cell:last-of-type {
+  border-top-right-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
+}
+
+@keyframes slide {
+  from {
+    left: 0%;
+  }
+  to {
+    left: calc(100% - 5rem);
+  }
+}
+
+/* ACTION BUTTONS */
+
+#action-btns {
+  display: flex;
+  /* flex-flow: column; */
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+#motion-btns,
+#undo-redo-reset-btns {
+  display: flex;
+  gap: 1.5rem;
+}
+
+#canvas button {
+  background-color: white;
+  outline: none;
+  border: none;
+  width: 3rem;
+  padding: 0.8rem 0;
+  height: 3rem;
+  line-height: 3rem;
+  text-align: center;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  border-radius: 100%;
+  cursor: pointer;
+  background-color: #222;
+  color: #aaa;
+}
+
+#canvas button:hover {
+  color: white;
+  transform: scale(1.1);
+  background-color: #333;
+}
+
+#canvas button:active {
+  background-color: deeppink;
+}
