@@ -1,13 +1,12 @@
-:root {
-  --cell-height: 5rem;
-  --cell-width: 5rem;
-  --window-width: 5rem;
-  --window-height: 5rem;
+#sliding-window-container {
+  --cell-width: 80px;
+  --cell-height: var(--cell-width);
+  --window-top-offset: 2rem;
+  --window-width: var(--cell-width);
+  --window-height: calc(var(--cell-height) + var(--window-top-offset));
   --cell-bg-color: #fdf2f8;
   --cell-text-color: #be185d;
-}
-
-#sliding-window-container {
+  --gap-between-cells: 5px;
   background: #111;
   width: 100vw;
   height: 100vh;
@@ -31,7 +30,7 @@
 #cell-values input {
   min-width: 30vw;
   background-color: #1e1e1e;
-  padding: 2rem 1rem;
+  padding: 1rem;
   border: none;
   outline: none;
   color: white;
@@ -54,42 +53,59 @@
   display: flex;
   position: relative;
   border-radius: 0.4rem;
+  transition: all 0.5s linear;
+  margin: 0 auto;
+  gap: var(--gap-between-cells);
 }
 
 #sliding-window {
-  /* border-radius: 0.4rem; */
+  border-radius: 0.4rem;
   position: absolute;
-  top: -1rem;
+  top: calc(var(--window-top-offset) / -2);
   left: 0;
-  width: 5rem;
-  height: 5rem;
-  background-color: var(--cell-text-color);
+  width: var(--window-width);
+  height: var(--window-height);
+  background-color: var(--cell-bg-color) / 100%;
   transition: all 0.2s ease-in-out;
-  height: 7rem;
-  border-top: 0.2rem solid var(--cell-text-color);
-  border-bottom: 0.2rem solid var(--cell-text-color);
+  border-top: 0.3rem solid var(--cell-text-color);
+  border-bottom: 0.3rem solid var(--cell-text-color);
 }
 
 .cell {
-  width: 5rem;
-  height: 5rem;
+  padding: 1rem;
+  width: var(--cell-width);
+  height: var(--cell-height);
   color: var(--cell-text-color);
-  line-height: 5rem;
   text-align: center;
   font-family: "Google Sans";
   font-weight: 500;
-  font-size: 3rem;
   position: relative;
   z-index: 999;
   background-color: var(--cell-bg-color);
   opacity: 0.5;
-  transition: all 0.2s ease-in-out;
-  font-size: 150%;
+  transition: all 0.3s ease-in-out;
+  font-size: 120%;
+  animation: loadCell 0.4s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: scale(0.8);
 }
 
 .cell.highlight {
   opacity: 1;
-  font-size: 200%;
+  font-size: 150%;
+  transform: scale(1);
+}
+
+@keyframes loadCell {
+  from {
+    /* right: calc(100% - 5rem); */
+    bottom: -5rem;
+  }
+  to {
+    bottom: 0rem;
+  }
 }
 
 /* highlight first cell by default */
@@ -114,7 +130,7 @@
 
 /* ACTION BUTTONS */
 
-#action-btns {
+#control-buttons {
   display: flex;
   /* flex-flow: column; */
   justify-content: center;
